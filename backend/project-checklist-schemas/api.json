@@ -1,0 +1,83 @@
+{
+  "type": "api",
+
+  "context": {
+    "api_name": "",
+    "description": "",
+    "api_type": "",
+    "base_url": "",
+    "version": "",
+    "consumers": [],
+    "documentation_url": ""
+  },
+
+  "auth": {
+    "has_auth": null,
+    "auth_types": [],
+    "has_roles": null,
+    "roles": [],
+    "has_scopes": null,
+    "token_behavior": {
+      "has_expiry": null,
+      "has_refresh_token": null,
+      "has_token_revocation": null
+    }
+  },
+
+  "endpoints": {
+    "has_crud_operations": null,
+    "has_bulk_operations": null,
+    "has_file_upload": null,
+    "has_file_download": null,
+    "has_search_filter": null,
+    "has_pagination": null,
+    "has_sorting": null,
+    "has_webhooks": null,
+    "has_websockets": null
+  },
+
+  "data": {
+    "has_database": null,
+    "has_input_validation": null,
+    "has_data_transformation": null,
+    "sensitive_data_fields": []
+  },
+
+  "response_behavior": {
+    "has_http_standards": true,
+    "has_consistent_error_format": null,
+    "has_versioning": null,
+    "has_sensitive_data_in_errors": null
+  },
+
+  "non_functional": {
+    "has_rate_limiting": null,
+    "has_performance_requirements": null,
+    "expected_requests_per_second": "",
+    "has_caching": null,
+    "has_idempotency": null,
+    "has_circuit_breaker": null
+  },
+
+  "integrations": {
+    "has_external_api_calls": null,
+    "external_apis": [],
+    "has_message_queue": null,
+    "has_database_migrations": null
+  },
+
+  "security": {
+    "has_injection_testing": true,
+    "has_mass_assignment_testing": null,
+    "has_bola_testing": true,
+    "has_cors_config": null
+  },
+
+  "environment": {
+    "has_multiple_environments": null,
+    "has_feature_flags": null,
+    "has_api_mocks_for_consumers": null
+  },
+
+  "notes": ""
+}

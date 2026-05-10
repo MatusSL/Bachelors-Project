@@ -1,0 +1,94 @@
+{
+  "type": "mobile-application",
+
+  "context": {
+    "app_name": "",
+    "description": "",
+    "target_audience": "",
+    "platform": [],
+    "app_type": "",
+    "minimum_os_versions": {
+      "has_ios": null,
+      "ios": "",
+      "has_android": null,
+      "android": ""
+    }
+  },
+
+  "distribution": {
+    "has_distribution_channels": null,
+    "distribution_channels": [],
+    "has_in_app_purchases": null,
+    "has_ads": null
+  },
+
+  "ui": {
+    "target_screen_sizes": [],
+    "has_landscape_support": null,
+    "has_dark_mode": null,
+    "has_accessibility_requirements": null,
+    "has_animations": null,
+    "has_gestures": null
+  },
+
+  "auth": {
+    "has_auth": null,
+    "auth_types": [],
+    "has_biometric_auth": null,
+    "has_roles": null,
+    "roles": [],
+    "session_management": {
+      "has_session_expiry": null,
+      "has_auto_lock": null
+    }
+  },
+
+  "device_features": {
+    "has_camera": null,
+    "has_microphone": null,
+    "has_location": null,
+    "has_push_notifications": null,
+    "has_contacts_access": null,
+    "has_storage_access": null,
+    "has_bluetooth": null,
+    "has_nfc": null,
+    "has_biometrics": null
+  },
+
+  "data": {
+    "has_forms": null,
+    "has_offline_mode": null,
+    "has_local_storage": null,
+    "has_file_upload": null,
+    "has_database": null,
+    "has_search": null
+  },
+
+  "integrations": {
+    "has_api": null,
+    "has_payments": null,
+    "has_deep_links": null,
+    "has_third_party_sdks": null,
+    "third_party_sdks": [],
+    "has_social_sharing": null
+  },
+
+  "non_functional": {
+    "has_performance_requirements": null,
+    "has_low_end_device_testing": null,
+    "has_crash_reporting": null,
+    "app_update_behavior": {
+      "has_force_update": null,
+      "has_migration": null
+    }
+  },
+
+  "environment": {
+    "has_multiple_environments": null,
+    "has_feature_flags": null,
+    "has_localization": null,
+    "supported_languages": []
+  },
+
+  "notes": ""
+}

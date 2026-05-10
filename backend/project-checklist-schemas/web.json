@@ -1,0 +1,69 @@
+{
+  "type": "web-application",
+
+  "context": {
+    "app_name": "",
+    "description": "",
+    "target_audience": "",
+    "is_public": null
+  },
+
+  "ui": {
+    "is_responsive": null,
+    "supported_browsers": [],
+    "supported_devices": [],
+    "has_dark_mode": null,
+    "has_accessibility_requirements": null,
+    "has_animations": null
+  },
+
+  "auth": {
+    "has_auth": null,
+    "auth_types": [],
+    "has_roles": null,
+    "roles": [],
+    "has_admin_panel": null,
+    "session_management": {
+      "has_session_management": null,
+      "has_session_expiry": null,
+      "has_remember_me": null,
+      "has_concurrent_session_limit": null
+    }
+  },
+
+  "data": {
+    "has_forms": null,
+    "has_database": null,
+    "has_file_upload": null,
+    "has_file_download": null,
+    "has_user_generated_content": null,
+    "has_search": null,
+    "has_pagination": null
+  },
+
+  "integrations": {
+    "has_api": null,
+    "api_type": "",
+    "has_payments": null,
+    "has_email_notifications": null,
+    "has_third_party_services": null,
+    "third_party_services": []
+  },
+
+  "non_functional": {
+    "has_performance_requirements": null,
+    "expected_concurrent_users": "",
+    "has_seo_requirements": null,
+    "has_analytics": null,
+    "has_error_monitoring": null
+  },
+
+  "environment": {
+    "has_multiple_environments": null,
+    "has_feature_flags": null,
+    "has_localization": null,
+    "supported_languages": []
+  },
+
+  "notes": ""
+}

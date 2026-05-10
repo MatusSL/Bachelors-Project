@@ -1,0 +1,87 @@
+{
+  "type": "desktop-application",
+
+  "context": {
+    "app_name": "",
+    "description": "",
+    "target_audience": "",
+    "app_framework": "",
+    "supported_os": [],
+    "supported_architectures": []
+  },
+
+  "installation": {
+    "has_installer": null,
+    "has_silent_install": null,
+    "has_admin_rights": null,
+    "has_auto_updater": null,
+    "has_uninstaller": null,
+    "has_license_activation": null
+  },
+
+  "ui": {
+    "has_multiple_windows": null,
+    "has_system_tray": null,
+    "has_keyboard_shortcuts": null,
+    "has_drag_and_drop": null,
+    "has_high_dpi_support": null,
+    "has_accessibility_requirements": null,
+    "has_context_menus": null,
+    "has_dark_mode": null
+  },
+
+  "auth": {
+    "has_auth": null,
+    "auth_types": [],
+    "has_roles": null,
+    "roles": [],
+    "session_management": {
+      "has_session_expiry": null,
+      "has_auto_lock": null
+    }
+  },
+
+  "data": {
+    "has_file_operations": null,
+    "supported_file_formats": [],
+    "has_import_export": null,
+    "has_local_database": null,
+    "has_cloud_sync": null,
+    "has_large_file_handling": null,
+    "has_undo_redo": null
+  },
+
+  "os_integration": {
+    "has_file_system_permissions": null,
+    "has_registry_access": null,
+    "has_notifications": null,
+    "has_clipboard": null,
+    "has_printing": null,
+    "has_shell_integration": null,
+    "has_startup_launch": null
+  },
+
+  "integrations": {
+    "has_api": null,
+    "has_third_party_integrations": null,
+    "third_party_integrations": [],
+    "has_plugin_system": null
+  },
+
+  "non_functional": {
+    "has_performance_requirements": null,
+    "has_minimum_spec_testing": null,
+    "has_crash_reporting": null,
+    "has_long_running_session_testing": null
+  },
+
+  "environment": {
+    "has_multiple_environments": null,
+    "has_feature_flags": null,
+    "has_localization": null,
+    "supported_languages": [],
+    "is_enterprise_deployed": null
+  },
+
+  "notes": ""
+}
