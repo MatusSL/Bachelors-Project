@@ -7,8 +7,14 @@
     "api_type": "",
     "base_url": "",
     "version": "",
+    "has_consumers": null,
     "consumers": [],
-    "documentation_url": ""
+    "has_documentation": null,
+    "documentation_url": "",
+    "_depends_on": {
+      "consumers": "has_consumers",
+      "documentation_url": "has_documentation"
+    }
   },
 
   "auth": {
@@ -40,7 +46,11 @@
     "has_database": null,
     "has_input_validation": null,
     "has_data_transformation": null,
-    "sensitive_data_fields": []
+    "has_sensitive_data": null,
+    "sensitive_data_fields": [],
+    "_depends_on": {
+      "sensitive_data_fields": "has_sensitive_data"
+    }
   },
 
   "response_behavior": {
@@ -56,14 +66,20 @@
     "expected_requests_per_second": "",
     "has_caching": null,
     "has_idempotency": null,
-    "has_circuit_breaker": null
+    "has_circuit_breaker": null,
+    "_depends_on": {
+      "expected_requests_per_second": "has_performance_requirements"
+    }
   },
 
   "integrations": {
     "has_external_api_calls": null,
     "external_apis": [],
     "has_message_queue": null,
-    "has_database_migrations": null
+    "has_database_migrations": null,
+    "_depends_on": {
+      "external_apis": "has_external_api_calls"
+    }
   },
 
   "security": {

@@ -64,6 +64,13 @@ class SessionManager:
 
     def _build_skip_set(self, block: SchemaBlock) -> set:
         skipped = set()
+
+        depends_on = block.get("_depends_on", {})
+        if isinstance(depends_on, dict):
+            for field, gate_flag in depends_on.items():
+                if block.get(gate_flag) is False:
+                    skipped.add(field)
+
         for key, value in block.items():
             if key.startswith("has_") and value is False:
                 skipped.add(key[4:])
@@ -79,6 +86,8 @@ class SessionManager:
         skipped = self._build_skip_set(block)
 
         for key, value in block.items():
+            if key.startswith("_"):
+                continue
             if key in skipped:
                 continue
             if isinstance(value, dict):
@@ -101,6 +110,8 @@ class SessionManager:
         for key, value in schema.items():
             path = f"{prefix}.{key}" if prefix else key
 
+            if key.startswith("_"):
+                continue
             if key in skipped:
                 continue
 
