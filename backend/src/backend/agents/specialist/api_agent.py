@@ -9,7 +9,9 @@ api_hints_map = {
     "context.api_type": "type of API (REST, GraphQL, gRPC)",
     "context.base_url": "base URL of the API",
     "context.version": "API version",
+    "context.has_consumers": "whether there is a known list of consumers, rather than a public or undefined audience",
     "context.consumers": "who or what consumes this API",
+    "context.has_documentation": "whether public or internal API documentation exists at a URL",
     "context.documentation_url": "where API documentation is hosted",
 
     # AUTH
@@ -37,6 +39,7 @@ api_hints_map = {
     "data.has_database": "whether the API uses a database",
     "data.has_input_validation": "whether input validation exists",
     "data.has_data_transformation": "whether data transformation occurs",
+    "data.has_sensitive_data": "whether the API handles any sensitive data fields (PII, secrets, payment info, etc.)",
     "data.sensitive_data_fields": "which fields contain sensitive data",
 
     # RESPONSE BEHAVIOR

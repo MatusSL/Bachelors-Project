@@ -9,6 +9,7 @@ desktop_hints_map = {
     "context.target_audience": "who uses the application",
     "context.app_framework": "which framework is used (Electron, Qt, .NET etc)",
     "context.supported_os": "which operating systems are supported",
+    "context.has_architecture_constraints": "whether the app targets specific CPU architectures, rather than running on any supported one",
     "context.supported_architectures": "which CPU architectures are supported",
 
     # INSTALLATION

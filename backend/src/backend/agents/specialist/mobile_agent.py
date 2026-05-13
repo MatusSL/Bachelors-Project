@@ -21,6 +21,7 @@ mobile_hints_map = {
     "distribution.has_ads": "whether the app shows ads",
 
     # UI
+    "ui.has_target_screen_sizes": "whether the app targets specific screen sizes or device types, rather than any phone or tablet",
     "ui.target_screen_sizes": "target screen sizes or device types",
     "ui.has_landscape_support": "whether landscape orientation is supported",
     "ui.has_dark_mode": "whether the app supports dark mode",

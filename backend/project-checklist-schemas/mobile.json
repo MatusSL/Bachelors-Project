@@ -23,12 +23,16 @@
   },
 
   "ui": {
+    "has_target_screen_sizes": null,
     "target_screen_sizes": [],
     "has_landscape_support": null,
     "has_dark_mode": null,
     "has_accessibility_requirements": null,
     "has_animations": null,
-    "has_gestures": null
+    "has_gestures": null,
+    "_depends_on": {
+      "target_screen_sizes": "has_target_screen_sizes"
+    }
   },
 
   "auth": {
@@ -87,7 +91,10 @@
     "has_multiple_environments": null,
     "has_feature_flags": null,
     "has_localization": null,
-    "supported_languages": []
+    "supported_languages": [],
+    "_depends_on": {
+      "supported_languages": "has_localization"
+    }
   },
 
   "notes": ""

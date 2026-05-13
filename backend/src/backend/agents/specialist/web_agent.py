@@ -10,7 +10,9 @@ web_hints_map = {
     "context.is_public": "whether the application is public or internal",
     # UI
     "ui.is_responsive": "whether the UI must support mobile and desktop screens",
+    "ui.has_browser_constraints": "whether the app must support a specific list of browsers, rather than any modern browser",
     "ui.supported_browsers": "which browsers must be supported",
+    "ui.has_device_constraints": "whether the app targets a specific list of devices, rather than any device with a modern browser",
     "ui.supported_devices": "which devices are supported",
     "ui.has_dark_mode": "whether the application supports dark mode",
     "ui.has_accessibility_requirements": "whether the application has accessibility requirements",

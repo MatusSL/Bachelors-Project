@@ -10,11 +10,17 @@
 
   "ui": {
     "is_responsive": null,
+    "has_browser_constraints": null,
     "supported_browsers": [],
+    "has_device_constraints": null,
     "supported_devices": [],
     "has_dark_mode": null,
     "has_accessibility_requirements": null,
-    "has_animations": null
+    "has_animations": null,
+    "_depends_on": {
+      "supported_browsers": "has_browser_constraints",
+      "supported_devices": "has_device_constraints"
+    }
   },
 
   "auth": {
@@ -47,7 +53,11 @@
     "has_payments": null,
     "has_email_notifications": null,
     "has_third_party_services": null,
-    "third_party_services": []
+    "third_party_services": [],
+    "_depends_on": {
+      "api_type": "has_api",
+      "third_party_services": "has_third_party_services"
+    }
   },
 
   "non_functional": {
@@ -55,14 +65,20 @@
     "expected_concurrent_users": "",
     "has_seo_requirements": null,
     "has_analytics": null,
-    "has_error_monitoring": null
+    "has_error_monitoring": null,
+    "_depends_on": {
+      "expected_concurrent_users": "has_performance_requirements"
+    }
   },
 
   "environment": {
     "has_multiple_environments": null,
     "has_feature_flags": null,
     "has_localization": null,
-    "supported_languages": []
+    "supported_languages": [],
+    "_depends_on": {
+      "supported_languages": "has_localization"
+    }
   },
 
   "notes": ""

@@ -7,7 +7,11 @@
     "target_audience": "",
     "app_framework": "",
     "supported_os": [],
-    "supported_architectures": []
+    "has_architecture_constraints": null,
+    "supported_architectures": [],
+    "_depends_on": {
+      "supported_architectures": "has_architecture_constraints"
+    }
   },
 
   "installation": {
@@ -48,7 +52,10 @@
     "has_local_database": null,
     "has_cloud_sync": null,
     "has_large_file_handling": null,
-    "has_undo_redo": null
+    "has_undo_redo": null,
+    "_depends_on": {
+      "supported_file_formats": "has_file_operations"
+    }
   },
 
   "os_integration": {
@@ -80,7 +87,10 @@
     "has_feature_flags": null,
     "has_localization": null,
     "supported_languages": [],
-    "is_enterprise_deployed": null
+    "is_enterprise_deployed": null,
+    "_depends_on": {
+      "supported_languages": "has_localization"
+    }
   },
 
   "notes": ""
