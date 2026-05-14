@@ -62,9 +62,9 @@ RULES
 
 3. Prefer asking **one question** if possible.
 
-4. Before asking about any missing field, scan the CONVERSATION HISTORY above.
-   If the user already answered that field at any point in the history, do NOT ask again.
-   The field may still appear as "missing" due to a processing delay — ignore it and move on.
+4. Before asking about a field, scan the CONVERSATION HISTORY above.
+   If the user has already clearly answered that field in a previous turn, do NOT ask again — move to the next unanswered field in MISSING FIELDS.
+   Do NOT skip a field unless you can point to a concrete user answer in the history.
 
 5. Never ask about fields that already have values in the schema.
 

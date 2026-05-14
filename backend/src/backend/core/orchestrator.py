@@ -28,6 +28,8 @@ from backend.schemas.services import OrchestratorServices
 
 logger = logging.getLogger(__name__)
 
+MAX_QUESTIONS_PER_TURN = 2
+
 
 class Orchestrator:
     def __init__(self, services: OrchestratorServices) -> None:
@@ -92,7 +94,7 @@ class Orchestrator:
             reply = self.conversational_agent.reply(
                 domain_rules=specialist.get_domain_rules(),
                 schema=state.schema,
-                missing_questions=missing_questions,
+                missing_questions=missing_questions[:MAX_QUESTIONS_PER_TURN],
                 history=history_without_last_user,
                 user_input=user_input,
             )
