@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 QWEN2_5_MODEL = "qwen2.5:latest"
-GPT_MODEL = "gpt-oss:20b"
+GPT_MODEL = "gpt-oss:latest"
 MISTRAL_CL = "mistral-large-3:675b-cloud"
 
 
