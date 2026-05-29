@@ -3,7 +3,7 @@ from typing import Dict, List
 
 from backend.agents.specialist.base_agent import BaseSpecialistAgent
 from backend.core.agent_registry import AgentRegistry
-from backend.core.session_manager import SessionManager
+from backend.core.session_manager import EXCLUDED_BLOCKS, SessionManager
 from backend.core.session_state import SessionState
 from backend.schemas.constants import (
     AppType,
@@ -35,6 +35,7 @@ class Orchestrator:
     def __init__(self, services: OrchestratorServices) -> None:
         self.runner = services.runner
         self.router_service = services.router_service
+        self.intent_detector = services.intent_detector
         self.conversational_agent = services.conversational_agent
         self.validation_service = services.validation_service
         self.specialist_generator = services.specialist_generator
@@ -77,13 +78,19 @@ class Orchestrator:
 
         logger.debug(self.normalized("MISSING QUESTIONS", str(missing_questions)))
 
-        if not missing_questions:
+        force = bool(missing_questions) and self.intent_detector.wants_checklist(
+            user_input
+        )
+
+        if not missing_questions or force:
             state.completed = True
+            unknown_fields = self.get_unknown_fields(state.schema) if force else []
             reply = self.checklist_generator.generate(
                 schema=state.schema,
                 domain_rules=specialist.get_domain_rules(),
                 risk_rules=specialist.get_risk_rules(),
                 priority_map=specialist.get_priority_map(),
+                unknown_fields=unknown_fields,
             )
         else:
             history_without_last_user = (
@@ -153,6 +160,12 @@ class Orchestrator:
             schema=state.schema,
             updates=updates,
         )
+
+    def get_unknown_fields(self, schema: Schema) -> List[str]:
+        missing = self.session_manager.find_missing_fields(schema)
+        return [
+            path for path in missing if path.split(".")[0] not in EXCLUDED_BLOCKS
+        ]
 
     def get_missing_questions(
         self, specialist: BaseSpecialistAgent, missing_fields: List[str]

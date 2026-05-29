@@ -29,6 +29,16 @@ class Router:
         return self.app_type
 
 
+class Intent:
+    def __init__(self, wants: bool = False) -> None:
+        self.wants = wants
+        self.inputs: list[str] = []
+
+    def wants_checklist(self, user_input: str) -> bool:
+        self.inputs.append(user_input)
+        return self.wants
+
+
 class Validation:
     def __init__(self, updates: dict[str, Any] | None = None) -> None:
         self.updates = updates or {}
@@ -83,14 +93,16 @@ class SpecialistGenerator:
 class Harness:
     orchestrator: Orchestrator
     router: Router
+    intent: Intent
     validation: Validation
     conversation: Conversation
     checklist: Checklist
     specialist_generator: SpecialistGenerator
 
 
-def build_harness(schema_dir, app_type=AppType.WEB, updates=None) -> Harness:
+def build_harness(schema_dir, app_type=AppType.WEB, updates=None, wants_checklist=False) -> Harness:
     router = Router(app_type)
+    intent = Intent(wants_checklist)
     validation = Validation(updates)
     conversation = Conversation()
     checklist = Checklist()
@@ -98,6 +110,7 @@ def build_harness(schema_dir, app_type=AppType.WEB, updates=None) -> Harness:
     services = OrchestratorServices(
         runner=object(),
         router_service=router,
+        intent_detector=intent,
         conversational_agent=conversation,
         validation_service=validation,
         specialist_generator=specialist_generator,
@@ -107,6 +120,7 @@ def build_harness(schema_dir, app_type=AppType.WEB, updates=None) -> Harness:
     return Harness(
         orchestrator=Orchestrator(services),
         router=router,
+        intent=intent,
         validation=validation,
         conversation=conversation,
         checklist=checklist,
@@ -212,6 +226,60 @@ def test_handle_message_generates_checklist_and_marks_session_complete_when_noth
     assert saved_messages == [ContextMessage(role="assistant", content="[HIGH PRIORITY]\n- test it")]
     assert updated_states == [state]
     assert response.completed is True
+
+
+def test_handle_message_force_generates_checklist_on_incomplete_schema(monkeypatch, schema_dir):
+    state = SessionState(
+        app_type=AppType.WEB,
+        schema={
+            "type": "web-application",
+            "context": {
+                "app_name": "Atlas",
+                "description": "",
+                "target_audience": "",
+                "is_public": None,
+            },
+        },
+        history=[ContextMessage("user", "just generate the checklist now")],
+    )
+    saved_messages, updated_states = install_repository_fakes(monkeypatch, state)
+    harness = build_harness(schema_dir, wants_checklist=True)
+
+    response = harness.orchestrator.handle_message("u1", "s1", "just generate the checklist now")
+
+    assert harness.intent.inputs == ["just generate the checklist now"]
+    assert state.completed is True
+    assert harness.conversation.calls == []
+    assert len(harness.checklist.calls) == 1
+    unknown = harness.checklist.calls[0]["unknown_fields"]
+    assert "context.description" in unknown
+    assert "type" not in unknown
+    assert response.completed is True
+
+
+def test_handle_message_does_not_force_when_intent_is_negative(monkeypatch, schema_dir):
+    state = SessionState(
+        app_type=AppType.WEB,
+        schema={
+            "type": "web-application",
+            "context": {
+                "app_name": "Atlas",
+                "description": "",
+                "target_audience": "",
+                "is_public": None,
+            },
+        },
+        history=[ContextMessage("user", "it targets everyone")],
+    )
+    install_repository_fakes(monkeypatch, state)
+    harness = build_harness(schema_dir, wants_checklist=False)
+
+    response = harness.orchestrator.handle_message("u1", "s1", "it targets everyone")
+
+    assert state.completed is False
+    assert harness.checklist.calls == []
+    assert len(harness.conversation.calls) == 1
+    assert response.completed is False
 
 
 def test_handle_message_builds_dynamic_specialist_for_other_app_type(monkeypatch, schema_dir):

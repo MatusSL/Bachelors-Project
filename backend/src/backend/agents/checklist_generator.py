@@ -33,6 +33,11 @@ IDENTIFIED RISKS ({risk_count} total, sorted HIGH → MEDIUM → LOW)
 {risks}
 
 --------------------------------------------------
+UNKNOWN / NOT PROVIDED FIELDS
+--------------------------------------------------
+{unknown_fields}
+
+--------------------------------------------------
 INSTRUCTIONS
 --------------------------------------------------
 
@@ -63,7 +68,12 @@ INSTRUCTIONS
 
 7. Do not include risks that did not apply to this project.
 
-8. Return only the checklist. No preamble, explanation, or closing remarks.
+8. The UNKNOWN / NOT PROVIDED FIELDS section lists project details the user did NOT
+   provide. Do NOT invent concrete values for them. For areas they cover, write generic
+   test cases and explicitly note the assumption (e.g. "Assuming token-based auth, ...").
+   If that section says all details were provided, ignore this rule.
+
+9. Return only the checklist. No preamble, explanation, or closing remarks.
 """
 
 
@@ -78,6 +88,7 @@ class ChecklistGenerator:
         domain_rules: str,
         risk_rules: List[Dict],
         priority_map: PriorityMap,
+        unknown_fields: List[str] | None = None,
     ) -> str:
         applicable = self._evaluate_risks(schema, risk_rules)
         sorted_risks = self._sort_risks(applicable, priority_map)
@@ -97,6 +108,7 @@ class ChecklistGenerator:
             domain_rules=domain_rules,
             risks=json.dumps(serialized, indent=2),
             risk_count=len(serialized),
+            unknown_fields=self._format_unknown_fields(unknown_fields),
         )
         try:
             return self.runner.invoke_agent(self.agent, prompt)
@@ -105,6 +117,16 @@ class ChecklistGenerator:
                 "Failed to generate checklist due to agent execution error.",
             )
             raise
+
+    def _format_unknown_fields(self, unknown_fields: List[str] | None) -> str:
+        if not unknown_fields:
+            return "All project details were provided."
+
+        listed = "\n".join(f"- {field}" for field in unknown_fields)
+        return (
+            "The user requested the checklist before providing these details:\n"
+            f"{listed}"
+        )
 
     def _evaluate_risks(self, schema: Schema, risk_rules: List[Dict]) -> List[Dict]:
         applicable = []

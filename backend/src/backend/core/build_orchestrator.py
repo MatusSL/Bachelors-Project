@@ -12,6 +12,7 @@ from backend.agents.schema_generator import SchemaGenerator
 from backend.agents.specialist_generator import SpecialistGenerator
 from backend.agents.validation_agent import ValidationService
 from backend.agents.router_agent import RouterService
+from backend.agents.intent_detector import IntentDetector
 from backend.core.orchestrator import Orchestrator
 from backend.schemas.constants import QWEN2_5_MODEL, GPT_MODEL
 from backend.schemas.services import OrchestratorServices, SpecialistServices
@@ -31,6 +32,11 @@ def create_conversational_agent(runner: Runner, model: BaseChatModel) -> Convers
 def create_router_service(runner: Runner, model: BaseChatModel) -> RouterService:
     agent = create_agent(model=model)
     return RouterService(runner=runner, router_agent=agent)
+
+
+def create_intent_detector(runner: Runner, model: BaseChatModel) -> IntentDetector:
+    agent = create_agent(model=model)
+    return IntentDetector(runner=runner, agent=agent)
 
 
 def create_validation_service(runner: Runner, model: BaseChatModel) -> ValidationService:
@@ -76,6 +82,7 @@ def create_checklist_generator(runner: Runner, model: BaseChatModel) -> Checklis
 
 def build_orchestrator() -> Orchestrator:
     ROUTER_MODEL = ChatOllama(model=QWEN2_5_MODEL, temperature=0)
+    INTENT_MODEL = ChatOllama(model=QWEN2_5_MODEL, temperature=0)
     CONVERSATIONAL_MODEL = ChatOllama(model=QWEN2_5_MODEL, temperature=0.3)
 
     VALIDATION_MODEL = ChatOllama(model=GPT_MODEL, temperature=0)
@@ -84,6 +91,7 @@ def build_orchestrator() -> Orchestrator:
     runner = Runner()
     
     router_service = create_router_service(runner, ROUTER_MODEL)
+    intent_detector = create_intent_detector(runner, INTENT_MODEL)
 
     validation_service = create_validation_service(runner, VALIDATION_MODEL)
     conversational_agent = create_conversational_agent(runner,CONVERSATIONAL_MODEL)
@@ -96,6 +104,7 @@ def build_orchestrator() -> Orchestrator:
     services = OrchestratorServices(
         runner=runner,
         router_service=router_service,
+        intent_detector=intent_detector,
         conversational_agent=conversational_agent,
         validation_service=validation_service,
         specialist_generator=specialist_generator,

@@ -6,6 +6,7 @@ from backend.schemas.protocols import (
     HintsGeneratorProtocol,
     RunnerProtocol,
     RouterServiceProtocol,
+    IntentDetectorProtocol,
     ConversationalAgentProtocol,
     SchemaGeneratorProtocol,
     ValidationServiceProtocol,
@@ -17,6 +18,7 @@ from backend.schemas.protocols import (
 class OrchestratorServices:
     runner: RunnerProtocol
     router_service: RouterServiceProtocol
+    intent_detector: IntentDetectorProtocol
     conversational_agent: ConversationalAgentProtocol
     validation_service: ValidationServiceProtocol
     specialist_generator: SpecialistGeneratorProtocol

@@ -19,6 +19,10 @@ class RouterServiceProtocol(Protocol):
     def detect_app_type(self, user_input: str) -> AppType: ...
 
 
+class IntentDetectorProtocol(Protocol):
+    def wants_checklist(self, user_input: str) -> bool: ...
+
+
 class ConversationalAgentProtocol(Protocol):
     def reply(
         self,
@@ -61,4 +65,5 @@ class ChecklistGeneratorProtocol(Protocol):
         domain_rules: str,
         risk_rules: List[Dict],
         priority_map: PriorityMap,
+        unknown_fields: List[str] | None = None
     ) -> str: ...
